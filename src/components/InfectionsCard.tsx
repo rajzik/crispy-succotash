@@ -1,6 +1,5 @@
 import { CommentOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Button, Card, Divider, Flex } from 'antd';
-import Grid from 'antd/es/card/Grid';
 
 import { FavoriteIconButton } from '~/components/FavoritedIcon';
 import { InfectionsChart } from '~/components/InfectionsChart';
