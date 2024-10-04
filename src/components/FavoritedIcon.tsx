@@ -44,7 +44,16 @@ export const FavoriteIconButton: FC<{
 
   return (
     <Button
-      loading={updateFavorite.isPending || isPending}
+      loading={
+        (updateFavorite.variables?.postId === postId &&
+          updateFavorite.isPending) ||
+        isPending
+      }
+      disabled={
+        (updateFavorite.variables?.postId === postId &&
+          updateFavorite.isPending) ||
+        isPending
+      }
       onClick={() => {
         updateFavorite.mutate({
           userId: userId!,
