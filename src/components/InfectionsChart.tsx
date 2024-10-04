@@ -41,7 +41,7 @@ export const InfectionsChart: FC<{
       chart.current = renderBarChart(containerReference.current, infections);
     }
   }, [infections]);
-  console.log(infections);
+
   return (
     <div
       className="h-[400px]"
