@@ -12,6 +12,22 @@ import { index, int, sqliteTableCreator, text } from 'drizzle-orm/sqlite-core';
  */
 export const createTable = sqliteTableCreator((name) => `hw_${name}`);
 
+export const favorites = createTable(
+  'favorite',
+  {
+    id: int('id', { mode: 'number' }).primaryKey({ autoIncrement: true }),
+    userId: text('userId', { length: 256 }),
+    postId: text('postId', { length: 256 }),
+    favorite: int('favorite', { mode: 'boolean' }),
+    updatedAt: int('updated_at', { mode: 'timestamp' }).$onUpdate(
+      () => new Date(),
+    ),
+  },
+  (example) => ({
+    userIdIndex: index('user_id_idx').on(example.userId),
+  }),
+);
+
 export const posts = createTable(
   'post',
   {

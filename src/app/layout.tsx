@@ -2,9 +2,12 @@ import '~/styles/globals.css';
 
 import type { Metadata } from 'next';
 
+import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { GeistSans } from 'geist/font/sans';
 
+import { ThemeProvider } from '~/components/ThemeProvider';
 import { TRPCReactProvider } from '~/trpc/react';
+import Layout from './layout.client';
 
 export const metadata: Metadata = {
   title: 'App title',
@@ -21,7 +24,13 @@ export default function RootLayout({
       className={`${GeistSans.variable}`}
     >
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <ThemeProvider>
+          <AntdRegistry>
+            <TRPCReactProvider>
+              <Layout>{children}</Layout>
+            </TRPCReactProvider>
+          </AntdRegistry>
+        </ThemeProvider>
       </body>
     </html>
   );

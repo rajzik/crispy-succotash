@@ -1,24 +1,55 @@
-import { LatestPost } from '~/components/post';
-import { api, HydrateClient } from '~/trpc/server';
+import {
+  DownloadOutlined,
+  FilterOutlined,
+  UnorderedListOutlined,
+} from '@ant-design/icons';
+import { Button, Col, Flex, Row } from 'antd';
+import Title from 'antd/es/typography/Title';
+
+import { InfectionsCard } from '~/components/InfectionsCard';
+import { VariantsCard } from '~/components/VariantsCard';
+import { HydrateClient } from '~/trpc/server';
 
 export default async function Home() {
-  const hello = await api.post.hello({ text: 'from tRPC' });
-
-  void api.post.getLatest.prefetch();
-
   return (
     <HydrateClient>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-2xl text-white">
-              {hello ? hello.greeting : 'Loading tRPC query...'}
-            </p>
-          </div>
+      <Flex justify="space-between">
+        <Title
+          level={2}
+          className="font-normal"
+        >
+          Page title
+        </Title>
+        <Flex gap={3}>
+          <Button
+            icon={<DownloadOutlined />}
+            iconPosition="end"
+          >
+            Export to PDF
+          </Button>
+          <Button
+            icon={<UnorderedListOutlined />}
+            iconPosition="end"
+          >
+            Notes
+          </Button>
+          <Button
+            icon={<FilterOutlined />}
+            iconPosition="end"
+          >
+            Filter
+          </Button>
+        </Flex>
+      </Flex>
 
-          <LatestPost />
-        </div>
-      </main>
+      <Row gutter={24}>
+        <Col span={12}>
+          <InfectionsCard />
+        </Col>
+        <Col span={12}>
+          <VariantsCard />
+        </Col>
+      </Row>
     </HydrateClient>
   );
 }

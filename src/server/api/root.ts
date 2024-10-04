@@ -1,3 +1,5 @@
+import { covidRouter } from '~/server/api/routers/covid';
+import { favoriteRouter } from '~/server/api/routers/favorite';
 import { postRouter } from '~/server/api/routers/post';
 import { createCallerFactory, createTRPCRouter } from '~/server/api/trpc';
 
@@ -8,6 +10,8 @@ import { createCallerFactory, createTRPCRouter } from '~/server/api/trpc';
  */
 export const appRouter = createTRPCRouter({
   post: postRouter,
+  covid: covidRouter,
+  favorite: favoriteRouter,
 });
 
 // export type definition of API
