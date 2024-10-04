@@ -10,7 +10,7 @@
 
 - `pnpm test`
 
-__Or:__
+**Or:**
 
 - `pnpm lint`
 - `pnpm format`
