@@ -3,11 +3,13 @@ import '~/styles/globals.css';
 import type { Metadata } from 'next';
 
 import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { Layout } from 'antd';
+import { Content, Header } from 'antd/es/layout/layout';
+import Title from 'antd/es/typography/Title';
 import { GeistSans } from 'geist/font/sans';
 
 import { ThemeProvider } from '~/components/ThemeProvider';
 import { TRPCReactProvider } from '~/trpc/react';
-import Layout from './layout.client';
 
 export const metadata: Metadata = {
   title: 'App title',
@@ -27,7 +29,17 @@ export default function RootLayout({
         <ThemeProvider>
           <AntdRegistry>
             <TRPCReactProvider>
-              <Layout>{children}</Layout>
+              <Layout rootClassName="h-lvh">
+                <Header className="flex items-center bg-white">
+                  <Title
+                    level={2}
+                    className="m-0 p-0"
+                  >
+                    App title
+                  </Title>
+                </Header>
+                <Content className="p-3 px-44">{children}</Content>
+              </Layout>
             </TRPCReactProvider>
           </AntdRegistry>
         </ThemeProvider>
