@@ -51,5 +51,10 @@ export const VariantsChart: FC<{
     }
   }, [variants]);
 
-  return <div ref={containerReference} />;
+  return (
+    <div
+      className="h-[400px]"
+      ref={containerReference}
+    />
+  );
 };

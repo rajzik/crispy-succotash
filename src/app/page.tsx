@@ -20,7 +20,7 @@ export default async function Home() {
         >
           Page title
         </Title>
-        <Flex gap={3}>
+        <Flex gap={25}>
           <Button
             icon={<DownloadOutlined />}
             iconPosition="end"

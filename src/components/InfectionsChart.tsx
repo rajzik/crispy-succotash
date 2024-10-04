@@ -42,5 +42,10 @@ export const InfectionsChart: FC<{
     }
   }, [infections]);
   console.log(infections);
-  return <div ref={containerReference} />;
+  return (
+    <div
+      className="h-[400px]"
+      ref={containerReference}
+    ></div>
+  );
 };

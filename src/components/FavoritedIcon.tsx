@@ -24,13 +24,13 @@ export const FavoriteIconButton: FC<{
   const userId = useLocalStorageId();
   const utils = api.useUtils();
 
-  const { data } = api.favorite.getFavorite.useQuery(
+  const { data, isPending } = api.favorite.getFavorite.useQuery(
     {
       userId: userId!,
       postId: postId,
     },
     {
-      enabled: !!userId,
+      enabled: Boolean(userId),
     },
   );
 
@@ -44,7 +44,7 @@ export const FavoriteIconButton: FC<{
 
   return (
     <Button
-      loading={updateFavorite.isPending}
+      loading={updateFavorite.isPending || isPending}
       onClick={() => {
         updateFavorite.mutate({
           userId: userId!,
