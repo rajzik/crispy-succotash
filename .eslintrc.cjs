@@ -67,7 +67,16 @@ const config = {
 
     // Unicorn
     'unicorn/no-null': 'off',
-
+    'unicorn/filename-case': [
+      'error',
+      {
+        cases: {
+          camelCase: true,
+          pascalCase: true,
+          kebabCase: true,
+        },
+      },
+    ],
     // Prettier
     // re-enable ESLint rules
     curly: ['error', 'all'],
