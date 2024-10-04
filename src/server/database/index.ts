@@ -1,7 +1,5 @@
-import type { Client } from '@libsql/client';
-
-import { createClient } from '@libsql/client';
-import { drizzle } from 'drizzle-orm/libsql';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 
 import { environment } from '~/environment';
 import * as schema from './schema';
@@ -11,11 +9,11 @@ import * as schema from './schema';
  * update.
  */
 const globalForDatabase = globalThis as unknown as {
-  client: Client | undefined;
+  client: postgres.Sql | undefined;
 };
 
 export const client =
-  globalForDatabase.client ?? createClient({ url: environment.DATABASE_URL });
+  globalForDatabase.client ?? postgres(environment.DATABASE_URL);
 if (environment.NODE_ENV !== 'production') {
   globalForDatabase.client = client;
 }

@@ -1,7 +1,14 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { index, int, sqliteTableCreator, text } from 'drizzle-orm/sqlite-core';
+import {
+  boolean,
+  index,
+  pgTableCreator,
+  serial,
+  text,
+  timestamp,
+} from 'drizzle-orm/pg-core';
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -9,18 +16,18 @@ import { index, int, sqliteTableCreator, text } from 'drizzle-orm/sqlite-core';
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const createTable = sqliteTableCreator((name) => `hw_${name}`);
+export const createTable = pgTableCreator((name) => `hw_a_${name}`);
 
 export const favorites = createTable(
   'favorite',
   {
-    id: int('id', { mode: 'number' }).primaryKey({ autoIncrement: true }),
-    userId: text('userId', { length: 256 }),
-    postId: text('postId', { length: 256 }),
-    favorite: int('favorite', { mode: 'boolean' }),
-    updatedAt: int('updated_at', { mode: 'timestamp' }).$onUpdate(
-      () => new Date(),
-    ),
+    id: serial('id').primaryKey(),
+    userId: text('userId'),
+    postId: text('postId'),
+    favorite: boolean('favorite'),
+    updatedAt: timestamp('updated_at')
+      .notNull()
+      .$onUpdate(() => new Date()),
   },
   (example) => ({
     userIdIndex: index('user_id_idx').on(example.userId),

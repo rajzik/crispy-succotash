@@ -4,9 +4,9 @@ import { environment } from '~/environment';
 
 export default {
   schema: './src/server/database/schema.ts',
-  dialect: 'sqlite',
+  dialect: 'postgresql',
   dbCredentials: {
     url: environment.DATABASE_URL,
   },
-  tablesFilter: ['hw_*'],
+  tablesFilter: ['hw_a*'],
 } satisfies Config;
