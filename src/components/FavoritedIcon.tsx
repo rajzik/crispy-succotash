@@ -41,19 +41,14 @@ export const FavoriteIconButton: FC<{
       await utils.favorite.invalidate();
     },
   });
+  const isLoading =
+    (updateFavorite.variables?.postId === postId && updateFavorite.isPending) ||
+    isPending;
 
   return (
     <Button
-      loading={
-        (updateFavorite.variables?.postId === postId &&
-          updateFavorite.isPending) ||
-        isPending
-      }
-      disabled={
-        (updateFavorite.variables?.postId === postId &&
-          updateFavorite.isPending) ||
-        isPending
-      }
+      loading={isLoading}
+      disabled={isLoading}
       onClick={() => {
         updateFavorite.mutate({
           userId: userId!,
